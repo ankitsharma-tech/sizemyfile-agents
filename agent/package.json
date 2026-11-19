@@ -3,11 +3,22 @@
   "version": "1.0.0",
   "description": "Local-first file workflows for MCP agents. Uses SizeMyFile's Rust/WASM and browser processors.",
   "type": "module",
-  "bin": {"sizemyfile-agent": "bin/sizemyfile.mjs"},
-  "engines": {"node": ">=22"},
-  "dependencies": {"playwright": "1.58.2"},
+  "bin": {
+    "sizemyfile-agent": "bin/sizemyfile.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "playwright": "1.65.1"
+  },
   "license": "MIT",
   "homepage": "https://sizemyfile.com/agents",
-  "files": ["bin", "README.md", "LICENSE", "catalog.json"],
+  "files": [
+    "bin",
+    "README.md",
+    "LICENSE",
+    "catalog.json"
+  ],
   "mcpName": "com.sizemyfile/tools"
 }
