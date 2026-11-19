@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "sizemyfile": {
+      "type": "http",
+      "url": "https://sizemyfile.com/mcp"
+    }
+  }
+}

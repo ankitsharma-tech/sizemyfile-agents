@@ -1,0 +1,4023 @@
+{
+  "version": "1.0.0",
+  "tools": [
+    {
+      "id": "heic-convert",
+      "name": "HEIC to JPG",
+      "description": "Decode an iPhone HEIC or HEIF photo and export a widely supported JPEG. Choose PNG to retain transparency where present.",
+      "category": "Images",
+      "engine": "utility",
+      "pair": false,
+      "action": "heic-convert",
+      "extensions": [
+        "heic",
+        "heif"
+      ],
+      "sample": "/samples/utilities/photo.heic",
+      "version": "1.0.0",
+      "runtime": "image",
+      "remote": false,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "format": {
+            "type": "string",
+            "enum": [
+              "jpeg",
+              "png"
+            ],
+            "default": "jpeg"
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Still images up to 32 MiB and 24 megapixels. Output is bounded to 32 MiB. Review colors and transparency after conversion.",
+      "batch": "map"
+    },
+    {
+      "id": "svg-raster",
+      "name": "SVG to PNG",
+      "description": "Rasterize a vector SVG at a chosen width. Scripts and external resources are rejected so the result depends only on the uploaded drawing.",
+      "category": "Images",
+      "engine": "utility",
+      "pair": false,
+      "action": "svg-raster",
+      "extensions": [
+        "svg"
+      ],
+      "sample": "/samples/utilities/drawing.svg",
+      "version": "1.0.0",
+      "runtime": "image",
+      "remote": false,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "width": {
+            "type": "number",
+            "minimum": 16,
+            "maximum": 6000,
+            "default": 1200
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Still images up to 32 MiB and 24 megapixels. Output is bounded to 32 MiB. Review colors and transparency after conversion. External fonts and linked images are not fetched.",
+      "batch": "map"
+    },
+    {
+      "id": "tiff-convert",
+      "name": "TIFF converter",
+      "description": "Read a selected TIFF page and export PNG or JPEG. Useful for scans and images that ordinary upload forms cannot display.",
+      "category": "Images",
+      "engine": "utility",
+      "pair": false,
+      "action": "tiff-convert",
+      "extensions": [
+        "tif",
+        "tiff"
+      ],
+      "sample": "/samples/utilities/scan.tiff",
+      "version": "1.0.0",
+      "runtime": "image",
+      "remote": false,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 50,
+            "default": 1
+          },
+          "format": {
+            "type": "string",
+            "enum": [
+              "png",
+              "jpeg"
+            ],
+            "default": "png"
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Still images up to 32 MiB and 24 megapixels. Output is bounded to 32 MiB. Review colors and transparency after conversion.",
+      "batch": "map"
+    },
+    {
+      "id": "gif-frames",
+      "name": "Extract GIF frames",
+      "description": "Decode an animated GIF into composited PNG frames, packaged with frame timing in a ZIP.",
+      "category": "Images",
+      "engine": "utility",
+      "pair": false,
+      "action": "gif-frames",
+      "extensions": [
+        "gif"
+      ],
+      "sample": "/samples/utilities/animation.gif",
+      "version": "1.0.0",
+      "runtime": "image",
+      "remote": false,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "limits": "Still images up to 32 MiB and 24 megapixels. Output is bounded to 32 MiB. Review colors and transparency after conversion. At most 100 frames and 64 megapixels of total frame output.",
+      "batch": "map"
+    },
+    {
+      "id": "image-watermark",
+      "name": "Watermark images",
+      "description": "Add a readable text watermark to a photo without changing its dimensions. Set text size, opacity and position before downloading.",
+      "category": "Images",
+      "engine": "utility",
+      "pair": false,
+      "action": "image-watermark",
+      "extensions": [
+        "jpg",
+        "jpeg",
+        "png",
+        "webp",
+        "avif"
+      ],
+      "sample": "/examples/detail-original.jpg",
+      "version": "1.0.0",
+      "runtime": "image",
+      "remote": false,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "maxLength": 8000,
+            "default": "SizeMyFile"
+          },
+          "size": {
+            "type": "number",
+            "minimum": 8,
+            "maximum": 400,
+            "default": 32
+          },
+          "opacity": {
+            "type": "number",
+            "minimum": 5,
+            "maximum": 100,
+            "default": 65
+          },
+          "position": {
+            "type": "string",
+            "enum": [
+              "bottom-right",
+              "center",
+              "top-left"
+            ],
+            "default": "bottom-right"
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Still images up to 32 MiB and 24 megapixels. Output is bounded to 32 MiB. Review colors and transparency after conversion.",
+      "batch": "map"
+    },
+    {
+      "id": "contact-sheet",
+      "name": "Create a contact sheet",
+      "description": "Arrange selected photographs in a labelled thumbnail grid. Download one PNG to review a collection or share an image index.",
+      "category": "Images",
+      "engine": "utility",
+      "pair": false,
+      "action": "contact-sheet",
+      "extensions": [
+        "jpg",
+        "jpeg",
+        "png",
+        "webp",
+        "avif"
+      ],
+      "sample": "/examples/detail-original.jpg",
+      "version": "1.0.0",
+      "runtime": "image",
+      "remote": false,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "columns": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 10,
+            "default": 4
+          },
+          "width": {
+            "type": "number",
+            "minimum": 80,
+            "maximum": 600,
+            "default": 240
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Still images up to 32 MiB and 24 megapixels. Output is bounded to 32 MiB. Review colors and transparency after conversion. Up to 50 images; thumbnails preserve aspect ratio.",
+      "batch": "combine"
+    },
+    {
+      "id": "metadata-remove",
+      "name": "Remove image metadata",
+      "description": "Re-encode a still image without copying EXIF, GPS or camera tags. A fresh PNG removes embedded metadata while preserving decoded pixels.",
+      "category": "Images",
+      "engine": "utility",
+      "pair": false,
+      "action": "metadata-remove",
+      "extensions": [
+        "jpg",
+        "jpeg",
+        "png",
+        "webp",
+        "avif"
+      ],
+      "sample": "/examples/detail-original.jpg",
+      "version": "1.0.0",
+      "runtime": "image",
+      "remote": false,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "limits": "Still images up to 32 MiB and 24 megapixels. Output is bounded to 32 MiB. Review colors and transparency after conversion. Re-encoding may change color interpretation; this does not remove visible sensitive information.",
+      "batch": "map"
+    },
+    {
+      "id": "images-pdf",
+      "name": "Images to PDF",
+      "description": "Combine photos or scanned pages into one PDF in selection order. Fit each image onto an A4 page without stretching.",
+      "category": "PDF & documents",
+      "engine": "utility",
+      "pair": false,
+      "action": "images-pdf",
+      "extensions": [
+        "jpg",
+        "jpeg",
+        "png",
+        "webp",
+        "avif"
+      ],
+      "sample": "/examples/detail-original.jpg",
+      "version": "1.0.0",
+      "runtime": "pdf",
+      "remote": false,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "paper": {
+            "type": "string",
+            "enum": [
+              "a4",
+              "image"
+            ],
+            "default": "a4"
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "PDF inputs and outputs are limited to 32 MiB; page rendering is limited to 50 pages and 12 megapixels per page. Encrypted inputs require a separate decryption workflow. Existing digital signatures will not remain valid after editing.",
+      "batch": "combine"
+    },
+    {
+      "id": "pdf-images",
+      "name": "PDF to images",
+      "description": "Render selected PDF pages to PNG files in a ZIP. Choose resolution and a page range for previews, presentations or image-only uploads.",
+      "category": "PDF & documents",
+      "engine": "utility",
+      "pair": false,
+      "action": "pdf-images",
+      "extensions": [
+        "pdf"
+      ],
+      "sample": "/samples/workspace/document.pdf",
+      "version": "1.0.0",
+      "runtime": "pdf",
+      "remote": false,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "pages": {
+            "type": "string",
+            "maxLength": 8000,
+            "default": ""
+          },
+          "scale": {
+            "type": "number",
+            "minimum": 0.5,
+            "maximum": 3,
+            "default": 1.5
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "PDF inputs and outputs are limited to 32 MiB; page rendering is limited to 50 pages and 12 megapixels per page. Encrypted inputs require a separate decryption workflow. Existing digital signatures will not remain valid after editing.",
+      "batch": "map"
+    },
+    {
+      "id": "pdf-forms",
+      "name": "Fill PDF forms",
+      "description": "List AcroForm field names, then fill text, checkbox and choice fields using a JSON map. Optionally flatten the filled fields into page content.",
+      "category": "PDF & documents",
+      "engine": "utility",
+      "pair": false,
+      "action": "pdf-forms",
+      "extensions": [
+        "pdf"
+      ],
+      "sample": "/samples/workspace/document.pdf",
+      "version": "1.0.0",
+      "runtime": "pdf",
+      "remote": false,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "string",
+            "maxLength": 8000,
+            "default": "{}"
+          },
+          "flatten": {
+            "type": "string",
+            "enum": [
+              "no",
+              "yes"
+            ],
+            "default": "no"
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "PDF inputs and outputs are limited to 32 MiB; page rendering is limited to 50 pages and 12 megapixels per page. Encrypted inputs require a separate decryption workflow. Existing digital signatures will not remain valid after editing. XFA forms and signature fields are unsupported.",
+      "batch": "map"
+    },
+    {
+      "id": "pdf-sign",
+      "name": "Add a signature to PDF",
+      "description": "Place a typed signature or an uploaded signature image on a PDF page. Choose its position and inspect the result before sharing.",
+      "category": "PDF & documents",
+      "engine": "utility",
+      "pair": false,
+      "action": "pdf-sign",
+      "extensions": [
+        "pdf",
+        "png",
+        "jpg",
+        "jpeg"
+      ],
+      "sample": "/samples/workspace/document.pdf",
+      "version": "1.0.0",
+      "runtime": "pdf",
+      "remote": false,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "maxLength": 8000,
+            "default": "Your name"
+          },
+          "page": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 1000,
+            "default": 1
+          },
+          "x": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 10000,
+            "default": 40
+          },
+          "y": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 10000,
+            "default": 40
+          },
+          "width": {
+            "type": "number",
+            "minimum": 20,
+            "maximum": 1000,
+            "default": 180
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "PDF inputs and outputs are limited to 32 MiB; page rendering is limited to 50 pages and 12 megapixels per page. Encrypted inputs require a separate decryption workflow. Existing digital signatures will not remain valid after editing. This is a visible signature mark, not a certificate-backed digital signature.",
+      "batch": "combine"
+    },
+    {
+      "id": "pdf-number",
+      "name": "Number PDF pages",
+      "description": "Add sequential page numbers in the footer of a PDF. Set the starting number and check the document in its original page order.",
+      "category": "PDF & documents",
+      "engine": "utility",
+      "pair": false,
+      "action": "pdf-number",
+      "extensions": [
+        "pdf"
+      ],
+      "sample": "/samples/workspace/document.pdf",
+      "version": "1.0.0",
+      "runtime": "pdf",
+      "remote": false,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "start": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100000,
+            "default": 1
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "PDF inputs and outputs are limited to 32 MiB; page rendering is limited to 50 pages and 12 megapixels per page. Encrypted inputs require a separate decryption workflow. Existing digital signatures will not remain valid after editing.",
+      "batch": "map"
+    },
+    {
+      "id": "pdf-watermark",
+      "name": "Watermark a PDF",
+      "description": "Stamp text on each PDF page with adjustable opacity. Keep a separate original when marking drafts or review copies.",
+      "category": "PDF & documents",
+      "engine": "utility",
+      "pair": false,
+      "action": "pdf-watermark",
+      "extensions": [
+        "pdf"
+      ],
+      "sample": "/samples/workspace/document.pdf",
+      "version": "1.0.0",
+      "runtime": "pdf",
+      "remote": false,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "maxLength": 8000,
+            "default": "DRAFT"
+          },
+          "opacity": {
+            "type": "number",
+            "minimum": 5,
+            "maximum": 100,
+            "default": 20
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "PDF inputs and outputs are limited to 32 MiB; page rendering is limited to 50 pages and 12 megapixels per page. Encrypted inputs require a separate decryption workflow. Existing digital signatures will not remain valid after editing.",
+      "batch": "map"
+    },
+    {
+      "id": "pdf-protect",
+      "name": "Password-protect a PDF",
+      "description": "Encrypt a PDF with AES-256 and an opening password. The protected download is verified by reopening it with that password.",
+      "category": "PDF & documents",
+      "engine": "utility",
+      "pair": false,
+      "action": "pdf-protect",
+      "extensions": [
+        "pdf"
+      ],
+      "sample": "/samples/workspace/document.pdf",
+      "version": "1.0.0",
+      "runtime": "qpdf",
+      "remote": false,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "password": {
+            "type": "string",
+            "maxLength": 8000,
+            "default": ""
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "PDF inputs and outputs are limited to 32 MiB; page rendering is limited to 50 pages and 12 megapixels per page. Encrypted inputs require a separate decryption workflow. Existing digital signatures will not remain valid after editing. Encryption runs in a local WebAssembly worker. Passwords never leave this device.",
+      "batch": "map"
+    },
+    {
+      "id": "pdf-redact",
+      "name": "Redact PDF content",
+      "description": "Remove selected page regions by rendering the document into new images and replacing those regions before rebuilding the PDF. Original text layers and attachments are not copied.",
+      "category": "PDF & documents",
+      "engine": "utility",
+      "pair": false,
+      "action": "pdf-redact",
+      "extensions": [
+        "pdf"
+      ],
+      "sample": "/samples/workspace/document.pdf",
+      "version": "1.0.0",
+      "runtime": "pdf",
+      "remote": false,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "regions": {
+            "type": "string",
+            "maxLength": 8000,
+            "default": "[{\"page\":1,\"x\":10,\"y\":10,\"width\":30,\"height\":10}]"
+          },
+          "scale": {
+            "type": "number",
+            "minimum": 0.5,
+            "maximum": 3,
+            "default": 1.5
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "PDF inputs and outputs are limited to 32 MiB; page rendering is limited to 50 pages and 12 megapixels per page. Encrypted inputs require a separate decryption workflow. Existing digital signatures will not remain valid after editing. Output loses searchable text, vectors, links and forms. Coordinates are top-left percentages. Review every selected region; redaction cannot identify sensitive content for you.",
+      "batch": "map"
+    },
+    {
+      "id": "pdf-redaction-check",
+      "name": "Check a redacted PDF",
+      "description": "Search extracted PDF text for phrases that should have been removed, and inspect attachments and annotations. Use the results alongside a visual review.",
+      "category": "PDF & documents",
+      "engine": "utility",
+      "pair": false,
+      "action": "pdf-redaction-check",
+      "extensions": [
+        "pdf"
+      ],
+      "sample": "/samples/workspace/document.pdf",
+      "version": "1.0.0",
+      "runtime": "pdf",
+      "remote": false,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "terms": {
+            "type": "string",
+            "maxLength": 8000,
+            "default": ""
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "PDF inputs and outputs are limited to 32 MiB; page rendering is limited to 50 pages and 12 megapixels per page. Encrypted inputs require a separate decryption workflow. Existing digital signatures will not remain valid after editing. A clean report is not proof all hidden or visible sensitive content is absent. Text drawn as pixels or outlines cannot be found by text search.",
+      "batch": "map"
+    },
+    {
+      "id": "document-scan",
+      "name": "Straighten and clean a scan",
+      "description": "Detect a document boundary on a contrasting background, correct perspective from four corners, rotate and clean a photographed page.",
+      "category": "Images",
+      "engine": "utility",
+      "pair": false,
+      "action": "document-scan",
+      "extensions": [
+        "jpg",
+        "jpeg",
+        "png",
+        "webp",
+        "avif"
+      ],
+      "sample": "/examples/detail-original.jpg",
+      "version": "1.0.0",
+      "runtime": "image",
+      "remote": false,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "corners": {
+            "type": "string",
+            "maxLength": 8000,
+            "default": ""
+          },
+          "rotation": {
+            "type": "number",
+            "minimum": -45,
+            "maximum": 45,
+            "default": 0
+          },
+          "clean": {
+            "type": "string",
+            "enum": [
+              "color",
+              "grayscale",
+              "black-white"
+            ],
+            "default": "grayscale"
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Still images up to 32 MiB and 24 megapixels. Output is bounded to 32 MiB. Review colors and transparency after conversion. Auto-detection is a suggestion. Enter or adjust the four corner coordinates when the boundary is unclear. No text or security detail is intentionally erased.",
+      "batch": "map"
+    },
+    {
+      "id": "image-ocr",
+      "name": "Extract text from an image",
+      "description": "Recognize printed English text in a photograph or screenshot on your device. Download editable UTF-8 text and review words against the original.",
+      "category": "Images",
+      "engine": "utility",
+      "pair": false,
+      "action": "image-ocr",
+      "extensions": [
+        "jpg",
+        "jpeg",
+        "png",
+        "webp",
+        "avif"
+      ],
+      "sample": "/examples/detail-original.jpg",
+      "version": "1.0.0",
+      "runtime": "ocr",
+      "remote": false,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "limits": "Still images up to 32 MiB and 24 megapixels. Output is bounded to 32 MiB. Review colors and transparency after conversion. English model; handwriting and low-resolution text may be inaccurate. The OCR model downloads once from this site.",
+      "batch": "map"
+    },
+    {
+      "id": "sheet-view",
+      "name": "View a spreadsheet",
+      "description": "List workbook worksheets and preview cell values from Excel or OpenDocument spreadsheets without running macros.",
+      "category": "Data",
+      "engine": "utility",
+      "pair": false,
+      "action": "sheet-view",
+      "extensions": [
+        "xlsx",
+        "xls",
+        "xlsb",
+        "ods"
+      ],
+      "sample": "/samples/utilities/workbook.xlsx",
+      "version": "1.0.0",
+      "runtime": "rust",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "sheet": {
+            "type": "string",
+            "maxLength": 8000,
+            "default": ""
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Up to 32 MiB input, 50,000 rows and 200 columns. CSV cells remain strings unless an operation explicitly parses numeric values. No uploaded code is executed. Formula cells use cached results when present; formulas are not recalculated. Formatting is not reproduced.",
+      "batch": "map"
+    },
+    {
+      "id": "sheet-export",
+      "name": "Spreadsheet to CSV, JSON or Parquet",
+      "description": "Export one Excel or ODS worksheet as a portable table. Select the worksheet and use its first row as column names.",
+      "category": "Data",
+      "engine": "utility",
+      "pair": false,
+      "action": "sheet-export",
+      "extensions": [
+        "xlsx",
+        "xls",
+        "xlsb",
+        "ods"
+      ],
+      "sample": "/samples/utilities/workbook.xlsx",
+      "version": "1.0.0",
+      "runtime": "rust",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "sheet": {
+            "type": "string",
+            "maxLength": 8000,
+            "default": ""
+          },
+          "format": {
+            "type": "string",
+            "enum": [
+              "csv",
+              "json",
+              "parquet"
+            ],
+            "default": "csv"
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Up to 32 MiB input, 50,000 rows and 200 columns. CSV cells remain strings unless an operation explicitly parses numeric values. No uploaded code is executed. Formatting, formulas and workbook features are not preserved. Cached cell values are exported.",
+      "batch": "map"
+    },
+    {
+      "id": "markdown-pdf",
+      "name": "Markdown to PDF",
+      "description": "Turn Markdown headings, paragraphs and lists into a readable PDF with automatic page breaks. Text is laid out locally without loading remote content.",
+      "category": "PDF & documents",
+      "engine": "utility",
+      "pair": false,
+      "action": "markdown-pdf",
+      "extensions": [
+        "md",
+        "txt"
+      ],
+      "sample": "/samples/workspace/notes.txt",
+      "version": "1.0.0",
+      "runtime": "pdf",
+      "remote": false,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "limits": "PDF inputs and outputs are limited to 32 MiB; page rendering is limited to 50 pages and 12 megapixels per page. Encrypted inputs require a separate decryption workflow. Existing digital signatures will not remain valid after editing. Supports basic Markdown text layout, not embedded HTML, remote images or complex tables.",
+      "batch": "map"
+    },
+    {
+      "id": "epub-reader",
+      "name": "Read an EPUB",
+      "description": "Extract the reading order, title and chapter text from an EPUB. Read plain text safely without executing book scripts or fetching external resources.",
+      "category": "PDF & documents",
+      "engine": "utility",
+      "pair": false,
+      "action": "epub-reader",
+      "extensions": [
+        "epub"
+      ],
+      "sample": "/samples/utilities/book.epub",
+      "version": "1.0.0",
+      "runtime": "epub",
+      "remote": false,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "limits": "DRM-free EPUB only, up to 32 MiB compressed and 64 MiB expanded. Chapter formatting and interactive content are not rendered.",
+      "batch": "map"
+    },
+    {
+      "id": "ebook-convert",
+      "name": "Convert EPUB to text or PDF",
+      "description": "Export a DRM-free EPUB in its spine reading order as plain text or a simple PDF for reading and search.",
+      "category": "PDF & documents",
+      "engine": "utility",
+      "pair": false,
+      "action": "ebook-convert",
+      "extensions": [
+        "epub"
+      ],
+      "sample": "/samples/utilities/book.epub",
+      "version": "1.0.0",
+      "runtime": "epub",
+      "remote": false,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "format": {
+            "type": "string",
+            "enum": [
+              "txt",
+              "pdf"
+            ],
+            "default": "txt"
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "PDF inputs and outputs are limited to 32 MiB; page rendering is limited to 50 pages and 12 megapixels per page. Encrypted inputs require a separate decryption workflow. Existing digital signatures will not remain valid after editing. Layout is rebuilt from chapter text; illustrations, tables and typography are not retained. DRM is not removed.",
+      "batch": "map"
+    },
+    {
+      "id": "pdf-word",
+      "name": "PDF to Word",
+      "description": "Extract PDF text into an editable DOCX with page breaks. Use it to edit the wording of a text-based PDF in Word or LibreOffice.",
+      "category": "PDF & documents",
+      "engine": "utility",
+      "pair": false,
+      "action": "pdf-word",
+      "extensions": [
+        "pdf"
+      ],
+      "sample": "/samples/workspace/document.pdf",
+      "version": "1.0.0",
+      "runtime": "pdf",
+      "remote": false,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "limits": "PDF inputs and outputs are limited to 32 MiB; page rendering is limited to 50 pages and 12 megapixels per page. Encrypted inputs require a separate decryption workflow. Existing digital signatures will not remain valid after editing. This is text extraction, not faithful page-layout reconstruction. Scans need OCR first; columns and reading order require review.",
+      "batch": "map"
+    },
+    {
+      "id": "sqlite",
+      "name": "SQLite viewer and query tool",
+      "description": "Inspect tables and run a read-only SELECT query against a SQLite database locally. Export the returned rows as CSV or JSON.",
+      "category": "Data",
+      "engine": "utility",
+      "pair": false,
+      "action": "sqlite",
+      "extensions": [
+        "sqlite",
+        "sqlite3",
+        "db"
+      ],
+      "sample": "/samples/utilities/example.sqlite",
+      "version": "1.0.0",
+      "runtime": "sqlite",
+      "remote": false,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "maxLength": 8000,
+            "default": ""
+          },
+          "format": {
+            "type": "string",
+            "enum": [
+              "json",
+              "csv"
+            ],
+            "default": "json"
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Up to 32 MiB input, 50,000 rows and 200 columns. CSV cells remain strings unless an operation explicitly parses numeric values. No uploaded code is executed. Read-only statements only. Extension loading, attachments and network access are disabled. Queries are stopped if they exceed the worker time budget.",
+      "batch": "map"
+    },
+    {
+      "id": "data-profile",
+      "name": "Profile a dataset",
+      "description": "Summarize each column with row counts, missing values, unique counts and numeric statistics. Use the report to spot surprising data before conversion.",
+      "category": "Data",
+      "engine": "utility",
+      "pair": false,
+      "action": "data-profile",
+      "extensions": [
+        "csv",
+        "tsv",
+        "json",
+        "jsonl",
+        "ndjson",
+        "parquet",
+        "arrow",
+        "ipc",
+        "feather"
+      ],
+      "sample": "/samples/workspace/people.csv",
+      "version": "1.0.0",
+      "runtime": "rust",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "limits": "Up to 32 MiB input, 50,000 rows and 200 columns. CSV cells remain strings unless an operation explicitly parses numeric values. No uploaded code is executed.",
+      "batch": "map"
+    },
+    {
+      "id": "data-missing",
+      "name": "Find missing values",
+      "description": "Count null and empty cells by column and list affected row numbers. Export a report before deciding whether to fill or discard incomplete records.",
+      "category": "Data",
+      "engine": "utility",
+      "pair": false,
+      "action": "data-missing",
+      "extensions": [
+        "csv",
+        "tsv",
+        "json",
+        "jsonl",
+        "ndjson",
+        "parquet",
+        "arrow",
+        "ipc",
+        "feather"
+      ],
+      "sample": "/samples/workspace/people.csv",
+      "version": "1.0.0",
+      "runtime": "rust",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "limits": "Up to 32 MiB input, 50,000 rows and 200 columns. CSV cells remain strings unless an operation explicitly parses numeric values. No uploaded code is executed. Whitespace-only strings count as missing; zero and false do not.",
+      "batch": "map"
+    },
+    {
+      "id": "data-validate",
+      "name": "Validate a dataset schema",
+      "description": "Check required columns and cell types against a small explicit schema. Report each violation without silently changing the source values.",
+      "category": "Data",
+      "engine": "utility",
+      "pair": false,
+      "action": "data-validate",
+      "extensions": [
+        "csv",
+        "tsv",
+        "json",
+        "jsonl",
+        "ndjson",
+        "parquet",
+        "arrow",
+        "ipc",
+        "feather"
+      ],
+      "sample": "/samples/workspace/people.csv",
+      "version": "1.0.0",
+      "runtime": "rust",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "schema": {
+            "type": "string",
+            "maxLength": 8000,
+            "default": "{\"name\":\"required\"}"
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Up to 32 MiB input, 50,000 rows and 200 columns. CSV cells remain strings unless an operation explicitly parses numeric values. No uploaded code is executed. Schema maps column names to string, number, integer, boolean or required. Numeric CSV strings can satisfy numeric checks.",
+      "batch": "map"
+    },
+    {
+      "id": "data-aggregate",
+      "name": "Group and aggregate data",
+      "description": "Group rows by one column and calculate count, sum, average, minimum or maximum for a numeric field.",
+      "category": "Data",
+      "engine": "utility",
+      "pair": false,
+      "action": "data-aggregate",
+      "extensions": [
+        "csv",
+        "tsv",
+        "json",
+        "jsonl",
+        "ndjson",
+        "parquet",
+        "arrow",
+        "ipc",
+        "feather"
+      ],
+      "sample": "/samples/workspace/people.csv",
+      "version": "1.0.0",
+      "runtime": "rust",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "group": {
+            "type": "string",
+            "maxLength": 8000,
+            "default": "country"
+          },
+          "column": {
+            "type": "string",
+            "maxLength": 8000,
+            "default": ""
+          },
+          "operation": {
+            "type": "string",
+            "enum": [
+              "count",
+              "sum",
+              "mean",
+              "min",
+              "max"
+            ],
+            "default": "count"
+          },
+          "format": {
+            "type": "string",
+            "enum": [
+              "csv",
+              "json",
+              "parquet"
+            ],
+            "default": "csv"
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Up to 32 MiB input, 50,000 rows and 200 columns. CSV cells remain strings unless an operation explicitly parses numeric values. No uploaded code is executed. Null and empty numeric cells are excluded from numeric aggregates. Non-numeric values cause an error.",
+      "batch": "map"
+    },
+    {
+      "id": "data-compare",
+      "name": "Compare datasets",
+      "description": "Compare two tables by a unique key to find added, removed and changed records. Review changed cell values in a downloadable report.",
+      "category": "Data",
+      "engine": "utility",
+      "pair": true,
+      "action": "data-compare",
+      "extensions": [
+        "csv",
+        "tsv",
+        "json",
+        "jsonl",
+        "ndjson",
+        "parquet",
+        "arrow",
+        "ipc",
+        "feather"
+      ],
+      "sample": "/samples/utilities/unique.csv",
+      "version": "1.0.0",
+      "runtime": "rust",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "maxLength": 8000,
+            "default": "id"
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Up to 32 MiB input, 50,000 rows and 200 columns. CSV cells remain strings unless an operation explicitly parses numeric values. No uploaded code is executed. Requires exactly two tables and a non-empty unique key in each. Row order alone does not create a difference.",
+      "batch": "pair"
+    },
+    {
+      "id": "model-params",
+      "name": "Count model parameters",
+      "description": "Count tensor elements and list per-tensor sizes from supported model descriptors without loading a machine-learning framework.",
+      "category": "Models",
+      "engine": "utility",
+      "pair": false,
+      "action": "model-params",
+      "extensions": [
+        "safetensors",
+        "onnx",
+        "gguf"
+      ],
+      "sample": "/samples/workspace/tiny.safetensors",
+      "version": "1.0.0",
+      "runtime": "rust",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "limits": "Static parsing within a 32 MiB combined input budget. No inference, Python imports or pickle execution. Reported compatibility is structural, not a guarantee a framework will load a model. ONNX counts stored initializers; it does not count runtime-generated tensors or prove which weights are trainable.",
+      "batch": "map"
+    },
+    {
+      "id": "model-memory",
+      "name": "Estimate model memory",
+      "description": "Estimate weight storage at common precisions from tensor shapes. Compare FP32, FP16 and INT8 weight footprints before choosing a device.",
+      "category": "Models",
+      "engine": "utility",
+      "pair": false,
+      "action": "model-memory",
+      "extensions": [
+        "safetensors",
+        "onnx",
+        "gguf"
+      ],
+      "sample": "/samples/workspace/tiny.safetensors",
+      "version": "1.0.0",
+      "runtime": "rust",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "limits": "Static parsing within a 32 MiB combined input budget. No inference, Python imports or pickle execution. Reported compatibility is structural, not a guarantee a framework will load a model. Weight-only estimate. Runtime memory also includes activations, KV cache, allocator overhead and framework state.",
+      "batch": "map"
+    },
+    {
+      "id": "onnx-graph",
+      "name": "View an ONNX graph",
+      "description": "View ONNX operators and their tensor connections as a graph. Inspect input and output descriptors without running inference.",
+      "category": "Models",
+      "engine": "utility",
+      "pair": false,
+      "action": "onnx-graph",
+      "extensions": [
+        "onnx"
+      ],
+      "sample": "/samples/utilities/tiny.onnx",
+      "version": "1.0.0",
+      "runtime": "rust",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "limits": "Static parsing within a 32 MiB combined input budget. No inference, Python imports or pickle execution. Reported compatibility is structural, not a guarantee a framework will load a model. Visual preview shows at most 200 nodes; the downloadable report includes up to 5,000 parsed nodes.",
+      "batch": "map"
+    },
+    {
+      "id": "tensor-histogram",
+      "name": "Plot a tensor histogram",
+      "description": "Read one F32 or F64 Safetensors tensor and group finite values into histogram bins. Count NaN and infinity separately.",
+      "category": "Models",
+      "engine": "utility",
+      "pair": false,
+      "action": "tensor-histogram",
+      "extensions": [
+        "safetensors"
+      ],
+      "sample": "/samples/workspace/tiny.safetensors",
+      "version": "1.0.0",
+      "runtime": "rust",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "tensor": {
+            "type": "string",
+            "maxLength": 8000,
+            "default": ""
+          },
+          "bins": {
+            "type": "number",
+            "minimum": 2,
+            "maximum": 100,
+            "default": 20
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Static parsing within a 32 MiB combined input budget. No inference, Python imports or pickle execution. Reported compatibility is structural, not a guarantee a framework will load a model. Tensor name is required when the file contains more than one tensor.",
+      "batch": "map"
+    },
+    {
+      "id": "model-shards",
+      "name": "Split or merge Safetensors",
+      "description": "Split a Safetensors file at tensor boundaries or combine shards into one file. A split ZIP includes an index mapping tensor names to shards.",
+      "category": "Models",
+      "engine": "utility",
+      "pair": false,
+      "action": "model-shards",
+      "extensions": [
+        "safetensors"
+      ],
+      "sample": "/samples/workspace/tiny.safetensors",
+      "version": "1.0.0",
+      "runtime": "rust",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "mode": {
+            "type": "string",
+            "enum": [
+              "split",
+              "merge"
+            ],
+            "default": "split"
+          },
+          "target": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 32,
+            "default": 8
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Static parsing within a 32 MiB combined input budget. No inference, Python imports or pickle execution. Reported compatibility is structural, not a guarantee a framework will load a model. A tensor is never split across files. Duplicate tensor names or conflicting metadata are rejected.",
+      "batch": "combine"
+    },
+    {
+      "id": "model-compat",
+      "name": "Check model structure",
+      "description": "Inspect dtypes, shapes, ONNX domains and external-data references before choosing a runtime. Download a structural compatibility checklist.",
+      "category": "Models",
+      "engine": "utility",
+      "pair": false,
+      "action": "model-compat",
+      "extensions": [
+        "safetensors",
+        "onnx",
+        "gguf"
+      ],
+      "sample": "/samples/workspace/tiny.safetensors",
+      "version": "1.0.0",
+      "runtime": "rust",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "limits": "Static parsing within a 32 MiB combined input budget. No inference, Python imports or pickle execution. Reported compatibility is structural, not a guarantee a framework will load a model. Reports facts and unresolved runtime requirements; it does not certify inference support for a particular framework version.",
+      "batch": "map"
+    },
+    {
+      "id": "media-trim",
+      "name": "Trim audio or video",
+      "description": "Extract a segment between two times from an audio or video file and export a new clip.",
+      "category": "Audio & video",
+      "engine": "utility",
+      "pair": false,
+      "action": "media-trim",
+      "extensions": [
+        "mp4",
+        "mov",
+        "webm",
+        "mkv",
+        "mp3",
+        "wav",
+        "m4a",
+        "ogg",
+        "flac"
+      ],
+      "sample": "/samples/workspace/video.mp4",
+      "version": "1.0.0",
+      "runtime": "media",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "start": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 600,
+            "default": 0
+          },
+          "end": {
+            "type": "number",
+            "minimum": 0.1,
+            "maximum": 600,
+            "default": 5
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Up to 32 MiB input/output and ten minutes of media. FFmpeg WebAssembly runs in a worker; small settings and clips work best on mobile. Automatic mode may use native FFmpeg in Kubernetes when the browser runs out of resources.",
+      "batch": "map"
+    },
+    {
+      "id": "video-mute",
+      "name": "Remove audio from video",
+      "description": "Remove audio tracks while copying the video stream into a new container. Review the silent video before publishing.",
+      "category": "Audio & video",
+      "engine": "utility",
+      "pair": false,
+      "action": "video-mute",
+      "extensions": [
+        "mp4",
+        "mov",
+        "webm",
+        "mkv"
+      ],
+      "sample": "/samples/workspace/video.mp4",
+      "version": "1.0.0",
+      "runtime": "media",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "limits": "Up to 32 MiB input/output and ten minutes of media. FFmpeg WebAssembly runs in a worker; small settings and clips work best on mobile. Automatic mode may use native FFmpeg in Kubernetes when the browser runs out of resources.",
+      "batch": "map"
+    },
+    {
+      "id": "audio-normalize",
+      "name": "Normalize audio volume",
+      "description": "Create an audio track with a target loudness using FFmpeg loudness normalization. Export WAV for further editing.",
+      "category": "Audio & video",
+      "engine": "utility",
+      "pair": false,
+      "action": "audio-normalize",
+      "extensions": [
+        "mp4",
+        "mov",
+        "webm",
+        "mkv",
+        "mp3",
+        "wav",
+        "m4a",
+        "ogg",
+        "flac"
+      ],
+      "sample": "/samples/workspace/video.mp4",
+      "version": "1.0.0",
+      "runtime": "media",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "lufs": {
+            "type": "number",
+            "minimum": -30,
+            "maximum": -5,
+            "default": -16
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Up to 32 MiB input/output and ten minutes of media. FFmpeg WebAssembly runs in a worker; small settings and clips work best on mobile. Automatic mode may use native FFmpeg in Kubernetes when the browser runs out of resources. One-pass normalization is approximate; inspect clipping and loudness in your editor.",
+      "batch": "map"
+    },
+    {
+      "id": "media-speed",
+      "name": "Change playback speed",
+      "description": "Speed up or slow down audio or video while adjusting timestamps. Audio tempo changes preserve pitch within the supported range.",
+      "category": "Audio & video",
+      "engine": "utility",
+      "pair": false,
+      "action": "media-speed",
+      "extensions": [
+        "mp4",
+        "mov",
+        "webm",
+        "mkv",
+        "mp3",
+        "wav",
+        "m4a",
+        "ogg",
+        "flac"
+      ],
+      "sample": "/samples/workspace/video.mp4",
+      "version": "1.0.0",
+      "runtime": "media",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "speed": {
+            "type": "number",
+            "minimum": 0.5,
+            "maximum": 2,
+            "default": 1.5
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Up to 32 MiB input/output and ten minutes of media. FFmpeg WebAssembly runs in a worker; small settings and clips work best on mobile. Automatic mode may use native FFmpeg in Kubernetes when the browser runs out of resources.",
+      "batch": "map"
+    },
+    {
+      "id": "video-frames",
+      "name": "Extract video frames",
+      "description": "Sample a video at a chosen interval and download PNG frames in a ZIP for review or reference.",
+      "category": "Audio & video",
+      "engine": "utility",
+      "pair": false,
+      "action": "video-frames",
+      "extensions": [
+        "mp4",
+        "mov",
+        "webm",
+        "mkv"
+      ],
+      "sample": "/samples/workspace/video.mp4",
+      "version": "1.0.0",
+      "runtime": "media",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "interval": {
+            "type": "number",
+            "minimum": 0.5,
+            "maximum": 60,
+            "default": 2
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Up to 32 MiB input/output and ten minutes of media. FFmpeg WebAssembly runs in a worker; small settings and clips work best on mobile. Automatic mode may use native FFmpeg in Kubernetes when the browser runs out of resources. At most 100 frames. Sampling interval and maximum output dimensions keep output bounded.",
+      "batch": "map"
+    },
+    {
+      "id": "video-gif",
+      "name": "Video to GIF",
+      "description": "Turn a short video segment into an animated GIF with a generated color palette.",
+      "category": "Audio & video",
+      "engine": "utility",
+      "pair": false,
+      "action": "video-gif",
+      "extensions": [
+        "mp4",
+        "mov",
+        "webm",
+        "mkv"
+      ],
+      "sample": "/samples/workspace/video.mp4",
+      "version": "1.0.0",
+      "runtime": "media",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "start": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 600,
+            "default": 0
+          },
+          "duration": {
+            "type": "number",
+            "minimum": 0.1,
+            "maximum": 15,
+            "default": 5
+          },
+          "width": {
+            "type": "number",
+            "minimum": 64,
+            "maximum": 800,
+            "default": 480
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Up to 32 MiB input/output and ten minutes of media. FFmpeg WebAssembly runs in a worker; small settings and clips work best on mobile. Automatic mode may use native FFmpeg in Kubernetes when the browser runs out of resources. GIF clips are limited to 15 seconds and 800 pixels wide.",
+      "batch": "map"
+    },
+    {
+      "id": "subtitle-convert",
+      "name": "Convert SRT and VTT subtitles",
+      "description": "Convert subtitle cue timestamps and text between SRT and WebVTT while preserving cue order.",
+      "category": "Audio & video",
+      "engine": "utility",
+      "pair": false,
+      "action": "subtitle-convert",
+      "extensions": [
+        "srt",
+        "vtt"
+      ],
+      "sample": "/samples/utilities/captions.srt",
+      "version": "1.0.0",
+      "runtime": "rust",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "format": {
+            "type": "string",
+            "enum": [
+              "vtt",
+              "srt"
+            ],
+            "default": "vtt"
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "UTF-8 text up to 32 MiB. Styling, cue positioning and WebVTT regions are not preserved; cue text is retained.",
+      "batch": "map"
+    },
+    {
+      "id": "subtitle-shift",
+      "name": "Shift subtitle timing",
+      "description": "Move all subtitle cue times by a chosen number of milliseconds to correct a constant synchronization offset.",
+      "category": "Audio & video",
+      "engine": "utility",
+      "pair": false,
+      "action": "subtitle-shift",
+      "extensions": [
+        "srt",
+        "vtt"
+      ],
+      "sample": "/samples/utilities/captions.srt",
+      "version": "1.0.0",
+      "runtime": "rust",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "shift": {
+            "type": "number",
+            "minimum": -600000,
+            "maximum": 600000,
+            "default": 1000
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "UTF-8 SRT or WebVTT. Shifts that would move a cue before zero are rejected. This does not correct gradual timing drift.",
+      "batch": "map"
+    },
+    {
+      "id": "archive-7z",
+      "name": "Open and extract 7z",
+      "description": "List a 7z archive and extract a selected entry without running its contents.",
+      "category": "Archives",
+      "engine": "utility",
+      "pair": false,
+      "action": "archive-7z",
+      "extensions": [
+        "7z"
+      ],
+      "sample": "/samples/utilities/example.7z",
+      "version": "1.0.0",
+      "runtime": "rust",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "entry": {
+            "type": "string",
+            "maxLength": 8000,
+            "default": ""
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Unencrypted 7z only, up to 32 MiB input, 64 MiB expanded and 1,000 entries. Solid archives are decoded within the same total expansion budget.",
+      "batch": "map"
+    },
+    {
+      "id": "archive-convert",
+      "name": "Convert archives",
+      "description": "Convert supported archives into ZIP, TAR or 7z while retaining regular file contents and safe relative paths.",
+      "category": "Archives",
+      "engine": "utility",
+      "pair": false,
+      "action": "archive-convert",
+      "extensions": [
+        "zip",
+        "tar",
+        "gz",
+        "7z"
+      ],
+      "sample": "/samples/workspace/example.zip",
+      "version": "1.0.0",
+      "runtime": "rust",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "format": {
+            "type": "string",
+            "enum": [
+              "zip",
+              "tar",
+              "7z"
+            ],
+            "default": "zip"
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Up to 32 MiB input/output and 64 MiB expanded. Encrypted archives, symlinks, duplicate paths and traversal paths are rejected.",
+      "batch": "map"
+    },
+    {
+      "id": "batch-rename",
+      "name": "Batch rename files",
+      "description": "Rename selected files with a prefix, sequence and suffix, then download them together. File contents remain byte-identical.",
+      "category": "Essentials",
+      "engine": "utility",
+      "pair": false,
+      "action": "batch-rename",
+      "sample": "/samples/workspace/notes.txt",
+      "version": "1.0.0",
+      "runtime": "files",
+      "remote": false,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "prefix": {
+            "type": "string",
+            "maxLength": 8000,
+            "default": "file-"
+          },
+          "start": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100000,
+            "default": 1
+          },
+          "suffix": {
+            "type": "string",
+            "maxLength": 8000,
+            "default": ""
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Up to 50 files and 32 MiB combined input/output. Renaming creates a ZIP; it does not change originals on your device.",
+      "batch": "combine"
+    },
+    {
+      "id": "duplicates",
+      "name": "Find duplicate files",
+      "description": "Calculate SHA-256 for selected files and group identical byte sequences. Download a report to review before deleting anything.",
+      "category": "Essentials",
+      "engine": "utility",
+      "pair": false,
+      "action": "duplicates",
+      "sample": "/samples/workspace/notes.txt",
+      "version": "1.0.0",
+      "runtime": "files",
+      "remote": false,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "limits": "Up to 50 selected files, read in chunks. Different encodings or metadata mean different bytes even if files look similar.",
+      "batch": "combine"
+    },
+    {
+      "id": "folder-compare",
+      "name": "Compare folder ZIPs",
+      "description": "Compare two folder snapshots saved as ZIP files by relative path and SHA-256. Find added, removed and changed files.",
+      "category": "Archives",
+      "engine": "utility",
+      "pair": true,
+      "action": "folder-compare",
+      "extensions": [
+        "zip"
+      ],
+      "sample": "/samples/workspace/example.zip",
+      "version": "1.0.0",
+      "runtime": "files",
+      "remote": false,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "limits": "Exactly two ZIPs, up to 32 MiB compressed and 64 MiB expanded in total. Timestamps are ignored; file bytes determine differences.",
+      "batch": "pair"
+    },
+    {
+      "id": "file-split",
+      "name": "Split a file into parts",
+      "description": "Split a file into numbered binary parts packaged with a manifest containing SHA-256 checksums and the original filename.",
+      "category": "Essentials",
+      "engine": "utility",
+      "pair": false,
+      "action": "file-split",
+      "sample": "/samples/workspace/notes.txt",
+      "version": "1.0.0",
+      "runtime": "files",
+      "remote": false,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "part": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 32,
+            "default": 4
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Up to 32 MiB input/output and 100 parts. A split ZIP may be slightly larger than the source because of archive and manifest overhead.",
+      "batch": "map"
+    },
+    {
+      "id": "file-reassemble",
+      "name": "Reassemble file parts",
+      "description": "Restore a file from a SizeMyFile split package and verify every part plus the complete file checksum before download.",
+      "category": "Essentials",
+      "engine": "utility",
+      "pair": false,
+      "action": "file-reassemble",
+      "extensions": [
+        "zip"
+      ],
+      "sample": "/samples/utilities/split.zip",
+      "version": "1.0.0",
+      "runtime": "files",
+      "remote": false,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "limits": "Requires the ZIP package and its manifest from the split tool. Missing, duplicate or modified parts fail validation.",
+      "batch": "map"
+    },
+    {
+      "id": "json-schema",
+      "name": "Validate JSON Schema",
+      "description": "Validate a JSON document against a Draft-07 schema you provide. Read precise field paths and validation failures without sending data to a server.",
+      "category": "Text & code",
+      "engine": "utility",
+      "pair": false,
+      "action": "json-schema",
+      "extensions": [
+        "json"
+      ],
+      "sample": "/samples/workspace/settings.json",
+      "version": "1.0.0",
+      "runtime": "json",
+      "remote": false,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "schema": {
+            "type": "string",
+            "maxLength": 8000,
+            "default": "{\"type\":\"object\"}"
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Local schema references only. Remote references and executable custom keywords are not loaded. Schema text is limited to 8 KiB.",
+      "batch": "map"
+    },
+    {
+      "id": "xml-json",
+      "name": "Convert XML and JSON",
+      "description": "Convert XML to a structured, ordered node representation in JSON, or rebuild XML from that representation. Attributes and mixed text remain explicit.",
+      "category": "Text & code",
+      "engine": "utility",
+      "pair": false,
+      "action": "xml-json",
+      "extensions": [
+        "xml",
+        "json"
+      ],
+      "sample": "/samples/utilities/example.xml",
+      "version": "1.0.0",
+      "runtime": "rust",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "format": {
+            "type": "string",
+            "enum": [
+              "json",
+              "xml"
+            ],
+            "default": "json"
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "UTF-8 input up to 32 MiB. DTDs and external entities are rejected. JSON-to-XML requires this tool’s node schema; arbitrary JSON has no unique XML mapping. XML declarations, comments and processing instructions are not preserved.",
+      "batch": "map"
+    },
+    {
+      "id": "json-diff",
+      "name": "Compare JSON structures",
+      "description": "Compare two JSON files by object keys and array positions. Report added, removed and changed values using JSON Pointer paths.",
+      "category": "Text & code",
+      "engine": "utility",
+      "pair": true,
+      "action": "json-diff",
+      "extensions": [
+        "json"
+      ],
+      "sample": "/samples/workspace/settings.json",
+      "version": "1.0.0",
+      "runtime": "rust",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "limits": "Exactly two JSON files, up to 32 MiB combined. Object key order is ignored; array order remains significant. Reports stop at 10,000 differences.",
+      "batch": "pair"
+    },
+    {
+      "id": "log-filter",
+      "name": "Filter a log file",
+      "description": "Keep log lines containing a literal search term, optionally ignoring case or inverting the match. Download the filtered lines.",
+      "category": "Text & code",
+      "engine": "utility",
+      "pair": false,
+      "action": "log-filter",
+      "extensions": [
+        "log",
+        "txt",
+        "jsonl",
+        "ndjson"
+      ],
+      "sample": "/samples/workspace/notes.txt",
+      "version": "1.0.0",
+      "runtime": "rust",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "maxLength": 8000,
+            "default": "error"
+          },
+          "case": {
+            "type": "string",
+            "enum": [
+              "no",
+              "yes"
+            ],
+            "default": "no"
+          },
+          "invert": {
+            "type": "string",
+            "enum": [
+              "no",
+              "yes"
+            ],
+            "default": "no"
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "UTF-8 text up to 32 MiB. Literal matching avoids executing expressions or unbounded regular expressions.",
+      "batch": "map"
+    },
+    {
+      "id": "har-inspect",
+      "name": "Inspect a HAR file",
+      "description": "Summarize HTTP requests, status codes, timings and response sizes in a browser network export. The report excludes cookies and authorization headers.",
+      "category": "Text & code",
+      "engine": "utility",
+      "pair": false,
+      "action": "har-inspect",
+      "extensions": [
+        "har",
+        "json"
+      ],
+      "sample": "/samples/utilities/network.har",
+      "version": "1.0.0",
+      "runtime": "rust",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "limits": "HAR JSON up to 32 MiB. URLs are reported without query strings; the source may still contain credentials. No recorded request is replayed.",
+      "batch": "map"
+    },
+    {
+      "id": "certificate",
+      "name": "Inspect a certificate",
+      "description": "Decode an X.509 certificate to inspect issuer, subject, validity dates, key algorithm and SHA-256 fingerprint.",
+      "category": "Text & code",
+      "engine": "utility",
+      "pair": false,
+      "action": "certificate",
+      "extensions": [
+        "pem",
+        "crt",
+        "cer",
+        "der"
+      ],
+      "sample": "/samples/utilities/certificate.crt",
+      "version": "1.0.0",
+      "runtime": "rust",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "limits": "PEM or DER certificate only, up to 1 MiB. This does not establish chain trust, revocation status or ownership. Private keys are not needed.",
+      "batch": "map"
+    },
+    {
+      "id": "hex-view",
+      "name": "View file bytes",
+      "description": "Inspect a bounded byte range as hexadecimal and printable ASCII. Choose an offset to examine a file signature or binary structure.",
+      "category": "Text & code",
+      "engine": "utility",
+      "pair": false,
+      "action": "hex-view",
+      "sample": "/samples/workspace/settings.json",
+      "version": "1.0.0",
+      "runtime": "rust",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "offset": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 33554432,
+            "default": 0
+          },
+          "length": {
+            "type": "number",
+            "minimum": 16,
+            "maximum": 65536,
+            "default": 1024
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Up to 32 MiB input and 64 KiB per displayed range. This is a byte viewer, not code execution or a full binary editor.",
+      "batch": "map"
+    },
+    {
+      "id": "file-encrypt",
+      "name": "Encrypt or decrypt files locally",
+      "description": "Package files and encrypt them on your device using AES-256-GCM with a password-derived key. Decryption authenticates the package before releasing its contents.",
+      "category": "Essentials",
+      "engine": "utility",
+      "pair": false,
+      "action": "file-encrypt",
+      "sample": "/samples/workspace/notes.txt",
+      "version": "1.0.0",
+      "runtime": "crypto",
+      "remote": false,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "mode": {
+            "type": "string",
+            "enum": [
+              "encrypt",
+              "decrypt"
+            ],
+            "default": "encrypt"
+          },
+          "password": {
+            "type": "string",
+            "maxLength": 8000,
+            "default": ""
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Up to 50 files and 32 MiB combined. Passwords never leave this device. Lost passwords cannot be recovered. Use the same tool to decrypt .smfenc packages.",
+      "batch": "combine"
+    },
+    {
+      "id": "attachments-inspect",
+      "name": "Inspect document attachments",
+      "description": "List embedded PDF attachments, Office package embeddings or MIME email attachments without opening or executing them.",
+      "category": "PDF & documents",
+      "engine": "utility",
+      "pair": false,
+      "action": "attachments-inspect",
+      "extensions": [
+        "pdf",
+        "docx",
+        "pptx",
+        "xlsx",
+        "odt",
+        "ods",
+        "odp",
+        "eml"
+      ],
+      "sample": "/samples/workspace/document.pdf",
+      "version": "1.0.0",
+      "runtime": "attachments",
+      "remote": false,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "limits": "Up to 32 MiB input and 64 MiB expanded. Reports identify stored attachment names and sizes; they are not malware scans.",
+      "batch": "map"
+    },
+    {
+      "id": "recipe-builder",
+      "name": "Run a saved file recipe",
+      "description": "Build and save a sequence of image crop, resize, conversion, compression and renaming steps. Apply it to selected files and download a ZIP.",
+      "category": "Essentials",
+      "engine": "utility",
+      "pair": false,
+      "action": "recipe-builder",
+      "extensions": [
+        "jpg",
+        "jpeg",
+        "png",
+        "webp",
+        "avif"
+      ],
+      "sample": "/examples/detail-original.jpg",
+      "version": "1.0.0",
+      "runtime": "recipe",
+      "remote": false,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "recipe": {
+            "type": "string",
+            "maxLength": 8000,
+            "default": "[{\"action\":\"resize\",\"width\":1200},{\"action\":\"convert\",\"format\":\"jpeg\",\"quality\":0.85},{\"action\":\"rename\",\"prefix\":\"prepared-\"}]"
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Still images up to 32 MiB and 24 megapixels. Output is bounded to 32 MiB. Review colors and transparency after conversion. Up to 50 images. Recipes contain settings only and stay in this browser. Exact compression targets can fail when incompatible with dimensions or quality.",
+      "batch": "combine"
+    },
+    {
+      "id": "portal-pack",
+      "name": "Prepare an upload document pack",
+      "description": "Check each selected file against your portal’s format and byte limits, apply a filename prefix and package a manifest with the files.",
+      "category": "Essentials",
+      "engine": "utility",
+      "pair": false,
+      "action": "portal-pack",
+      "sample": "/samples/workspace/notes.txt",
+      "version": "1.0.0",
+      "runtime": "files",
+      "remote": false,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "extensions": {
+            "type": "string",
+            "maxLength": 8000,
+            "default": "pdf,jpg,jpeg,png"
+          },
+          "maxKB": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 32768,
+            "default": 2048
+          },
+          "minKB": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 32768,
+            "default": 0
+          },
+          "prefix": {
+            "type": "string",
+            "maxLength": 8000,
+            "default": "application-"
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Uses requirements you provide, not guessed government rules. Read the current official portal instructions. A pass verifies only configured format extensions and byte limits, not document eligibility or acceptance.",
+      "batch": "combine"
+    },
+    {
+      "id": "pdf-rotate",
+      "name": "Rotate PDF pages",
+      "description": "Turn selected PDF pages clockwise by 90, 180 or 270 degrees. Correct sideways scans while preserving page content, text and the order of the document.",
+      "category": "PDF & documents",
+      "engine": "utility",
+      "pair": false,
+      "action": "pdf-rotate",
+      "extensions": [
+        "pdf"
+      ],
+      "sample": "/samples/workspace/document.pdf",
+      "version": "1.0.0",
+      "runtime": "pdf",
+      "remote": false,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "pages": {
+            "type": "string",
+            "maxLength": 8000,
+            "default": ""
+          },
+          "angle": {
+            "type": "string",
+            "enum": [
+              "90",
+              "180",
+              "270"
+            ],
+            "default": "90"
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "PDF input/output up to 32 MiB and 1,000 pages. Rotation changes page orientation, not the image pixels or page order. Editing invalidates existing digital signatures. Encrypted PDFs are not supported.",
+      "batch": "map"
+    },
+    {
+      "id": "compress",
+      "name": "Compress files",
+      "description": "Make images and PDFs fit a size limit.",
+      "category": "Essentials",
+      "engine": "media",
+      "action": "compress",
+      "sample": "/examples/detail-original.jpg",
+      "popular": true,
+      "version": "1.0.0",
+      "runtime": "media",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "output": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "jpeg",
+              "png",
+              "webp",
+              "avif",
+              "pdf",
+              "mp4",
+              "mp3",
+              "csv",
+              "json",
+              "jsonl",
+              "parquet",
+              "arrow",
+              "npy",
+              "safetensors",
+              "obj",
+              "stl",
+              "yaml",
+              "toml",
+              "xml",
+              "utf8",
+              "utf16le",
+              "utf16be",
+              "latin1"
+            ]
+          },
+          "max_bytes": {
+            "type": "integer",
+            "minimum": 512,
+            "maximum": 33554432
+          },
+          "min_bytes": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 33554432
+          },
+          "allow_upscale": {
+            "type": "boolean"
+          },
+          "allow_resize": {
+            "type": "boolean"
+          },
+          "compression_mode": {
+            "type": "string",
+            "enum": [
+              "balanced",
+              "lossless"
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Bounded processing; 32 MiB combined input per operation, at most 50 files.",
+      "batch": "map"
+    },
+    {
+      "id": "upload-fit",
+      "name": "Fit an upload requirement",
+      "description": "Use a portal’s size limit, dimensions or upload error.",
+      "category": "Essentials",
+      "engine": "media",
+      "action": "compress",
+      "sample": "/examples/detail-original.jpg",
+      "version": "1.0.0",
+      "runtime": "media",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "output": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "jpeg",
+              "png",
+              "webp",
+              "avif",
+              "pdf",
+              "mp4",
+              "mp3",
+              "csv",
+              "json",
+              "jsonl",
+              "parquet",
+              "arrow",
+              "npy",
+              "safetensors",
+              "obj",
+              "stl",
+              "yaml",
+              "toml",
+              "xml",
+              "utf8",
+              "utf16le",
+              "utf16be",
+              "latin1"
+            ]
+          },
+          "max_bytes": {
+            "type": "integer",
+            "minimum": 512,
+            "maximum": 33554432
+          },
+          "min_bytes": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 33554432
+          },
+          "allow_upscale": {
+            "type": "boolean"
+          },
+          "allow_resize": {
+            "type": "boolean"
+          },
+          "compression_mode": {
+            "type": "string",
+            "enum": [
+              "balanced",
+              "lossless"
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Bounded processing; 32 MiB combined input per operation, at most 50 files.",
+      "batch": "map"
+    },
+    {
+      "id": "convert-image",
+      "name": "Convert an image",
+      "description": "Switch between JPG, PNG, WebP and AVIF.",
+      "category": "Images",
+      "engine": "media",
+      "action": "convert",
+      "sample": "/examples/detail-original.jpg",
+      "popular": true,
+      "version": "1.0.0",
+      "runtime": "media",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "output": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "jpeg",
+              "png",
+              "webp",
+              "avif",
+              "pdf",
+              "mp4",
+              "mp3",
+              "csv",
+              "json",
+              "jsonl",
+              "parquet",
+              "arrow",
+              "npy",
+              "safetensors",
+              "obj",
+              "stl",
+              "yaml",
+              "toml",
+              "xml",
+              "utf8",
+              "utf16le",
+              "utf16be",
+              "latin1"
+            ]
+          },
+          "max_bytes": {
+            "type": "integer",
+            "minimum": 512,
+            "maximum": 33554432
+          },
+          "min_bytes": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 33554432
+          },
+          "allow_upscale": {
+            "type": "boolean"
+          },
+          "allow_resize": {
+            "type": "boolean"
+          },
+          "compression_mode": {
+            "type": "string",
+            "enum": [
+              "balanced",
+              "lossless"
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Bounded processing; 32 MiB combined input per operation, at most 50 files.",
+      "batch": "map"
+    },
+    {
+      "id": "resize",
+      "name": "Resize images",
+      "description": "Adjust pixel dimensions for one image or up to 50 selected images. Make them smaller or larger.",
+      "batchDescription": "Change image dimensions in pixels. Set a shared width or height for up to 50 images, preserving each image’s proportions.",
+      "category": "Images",
+      "engine": "media",
+      "action": "resize",
+      "sample": "/examples/detail-original.jpg",
+      "hint": "Set a target width or height; each image keeps its own proportions. Crop first to change its shape.",
+      "version": "1.0.0",
+      "runtime": "media",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "width": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 12000
+          },
+          "height": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 12000
+          },
+          "output": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "jpeg",
+              "png",
+              "webp",
+              "avif",
+              "pdf",
+              "mp4",
+              "mp3",
+              "csv",
+              "json",
+              "jsonl",
+              "parquet",
+              "arrow",
+              "npy",
+              "safetensors",
+              "obj",
+              "stl",
+              "yaml",
+              "toml",
+              "xml",
+              "utf8",
+              "utf16le",
+              "utf16be",
+              "latin1"
+            ]
+          },
+          "max_bytes": {
+            "type": "integer",
+            "minimum": 512,
+            "maximum": 33554432
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Set a target width or height; each image keeps its own proportions. Crop first to change its shape.",
+      "batch": "map"
+    },
+    {
+      "id": "edit-image",
+      "name": "Crop & edit an image",
+      "description": "Crop, trim blank space and change the background.",
+      "category": "Images",
+      "engine": "editor",
+      "action": "edit",
+      "sample": "/examples/detail-original.jpg",
+      "popular": true,
+      "version": "1.0.0",
+      "runtime": "editor",
+      "remote": false,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "x": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 12000
+          },
+          "y": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 12000
+          },
+          "width": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 12000
+          },
+          "height": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 12000
+          },
+          "background": {
+            "type": "string",
+            "enum": [
+              "transparent",
+              "white",
+              "black"
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Bounded processing; 32 MiB combined input per operation, at most 50 files.",
+      "batch": "map"
+    },
+    {
+      "id": "remove-background",
+      "name": "Remove a background",
+      "description": "Create a cutout with a transparent or solid background.",
+      "category": "Images",
+      "engine": "editor",
+      "action": "edit",
+      "sample": "/examples/detail-original.jpg",
+      "version": "1.0.0",
+      "runtime": "editor",
+      "remote": false,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "background": {
+            "type": "string",
+            "enum": [
+              "transparent",
+              "white",
+              "black"
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Bounded processing; 32 MiB combined input per operation, at most 50 files.",
+      "batch": "map"
+    },
+    {
+      "id": "lossless",
+      "name": "Compress without loss",
+      "description": "Preserve image pixels or clean up a PDF.",
+      "category": "Essentials",
+      "engine": "media",
+      "action": "lossless",
+      "sample": "/examples/detail-original.jpg",
+      "version": "1.0.0",
+      "runtime": "media",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "output": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "jpeg",
+              "png",
+              "webp",
+              "avif",
+              "pdf",
+              "mp4",
+              "mp3",
+              "csv",
+              "json",
+              "jsonl",
+              "parquet",
+              "arrow",
+              "npy",
+              "safetensors",
+              "obj",
+              "stl",
+              "yaml",
+              "toml",
+              "xml",
+              "utf8",
+              "utf16le",
+              "utf16be",
+              "latin1"
+            ]
+          },
+          "max_bytes": {
+            "type": "integer",
+            "minimum": 512,
+            "maximum": 33554432
+          },
+          "min_bytes": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 33554432
+          },
+          "allow_upscale": {
+            "type": "boolean"
+          },
+          "allow_resize": {
+            "type": "boolean"
+          },
+          "compression_mode": {
+            "type": "string",
+            "enum": [
+              "balanced",
+              "lossless"
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Bounded processing; 32 MiB combined input per operation, at most 50 files.",
+      "batch": "map"
+    },
+    {
+      "id": "increase",
+      "name": "Increase file size",
+      "description": "Meet a minimum KB requirement without adding detail.",
+      "category": "Essentials",
+      "engine": "media",
+      "action": "increase",
+      "sample": "/examples/detail-original.jpg",
+      "version": "1.0.0",
+      "runtime": "media",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "output": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "jpeg",
+              "png",
+              "webp",
+              "avif",
+              "pdf",
+              "mp4",
+              "mp3",
+              "csv",
+              "json",
+              "jsonl",
+              "parquet",
+              "arrow",
+              "npy",
+              "safetensors",
+              "obj",
+              "stl",
+              "yaml",
+              "toml",
+              "xml",
+              "utf8",
+              "utf16le",
+              "utf16be",
+              "latin1"
+            ]
+          },
+          "max_bytes": {
+            "type": "integer",
+            "minimum": 512,
+            "maximum": 33554432
+          },
+          "min_bytes": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 33554432
+          },
+          "allow_upscale": {
+            "type": "boolean"
+          },
+          "allow_resize": {
+            "type": "boolean"
+          },
+          "compression_mode": {
+            "type": "string",
+            "enum": [
+              "balanced",
+              "lossless"
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Bounded processing; 32 MiB combined input per operation, at most 50 files.",
+      "batch": "map"
+    },
+    {
+      "id": "ai-check",
+      "name": "Check an AI image",
+      "description": "Inspect metadata and an experimental AI-image score.",
+      "category": "Images",
+      "engine": "checker",
+      "action": "check",
+      "sample": "/examples/detail-original.jpg",
+      "hint": "An advisory check, not proof of whether a person or AI made the image.",
+      "version": "1.0.0",
+      "runtime": "checker",
+      "remote": false,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "run_model": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "An advisory check, not proof of whether a person or AI made the image.",
+      "batch": "map"
+    },
+    {
+      "id": "pdf-merge",
+      "name": "Merge PDFs",
+      "description": "Join all pages from the selected PDF files into one PDF. Supports 2–50 input PDFs and up to 200 pages, preserving their order.",
+      "category": "PDF & documents",
+      "engine": "files",
+      "action": "merge",
+      "extensions": [
+        "pdf"
+      ],
+      "sample": "/samples/workspace/document.pdf",
+      "multi": true,
+      "popular": true,
+      "hint": "Maximum 32 MiB combined input. Signed, encrypted and interactive PDFs are not supported.",
+      "version": "1.0.0",
+      "runtime": "files",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "limits": "Maximum 32 MiB combined input. Signed, encrypted and interactive PDFs are not supported.",
+      "batch": "combine"
+    },
+    {
+      "id": "pdf-pages",
+      "name": "Split & reorder PDF pages",
+      "description": "Extract a page range or put pages in a new order.",
+      "category": "PDF & documents",
+      "engine": "files",
+      "action": "pages",
+      "extensions": [
+        "pdf"
+      ],
+      "sample": "/samples/workspace/document.pdf",
+      "version": "1.0.0",
+      "runtime": "files",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "pages": {
+            "type": "string",
+            "maxLength": 8000
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Bounded processing; 32 MiB combined input per operation, at most 50 files.",
+      "batch": "map"
+    },
+    {
+      "id": "document-text",
+      "name": "Extract document text",
+      "description": "Read text from PDF, DOCX, PPTX or XLSX files.",
+      "category": "PDF & documents",
+      "engine": "files",
+      "action": "text",
+      "extensions": [
+        "pdf",
+        "docx",
+        "pptx",
+        "xlsx"
+      ],
+      "sample": "/samples/workspace/document.pdf",
+      "version": "1.0.0",
+      "runtime": "files",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "limits": "Bounded processing; 32 MiB combined input per operation, at most 50 files.",
+      "batch": "map"
+    },
+    {
+      "id": "office-pdf",
+      "name": "Office to PDF",
+      "description": "Turn Word documents and PowerPoint slides into PDFs.",
+      "category": "PDF & documents",
+      "engine": "media",
+      "action": "convert",
+      "output": "pdf",
+      "extensions": [
+        "docx",
+        "pptx"
+      ],
+      "sample": "/samples/workspace/document.docx",
+      "hint": "Uses a temporary server upload for LibreOffice conversion.",
+      "version": "1.0.0",
+      "runtime": "media",
+      "remote": true,
+      "local": false,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "output": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "jpeg",
+              "png",
+              "webp",
+              "avif",
+              "pdf",
+              "mp4",
+              "mp3",
+              "csv",
+              "json",
+              "jsonl",
+              "parquet",
+              "arrow",
+              "npy",
+              "safetensors",
+              "obj",
+              "stl",
+              "yaml",
+              "toml",
+              "xml",
+              "utf8",
+              "utf16le",
+              "utf16be",
+              "latin1"
+            ]
+          },
+          "max_bytes": {
+            "type": "integer",
+            "minimum": 512,
+            "maximum": 33554432
+          },
+          "min_bytes": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 33554432
+          },
+          "allow_upscale": {
+            "type": "boolean"
+          },
+          "allow_resize": {
+            "type": "boolean"
+          },
+          "compression_mode": {
+            "type": "string",
+            "enum": [
+              "balanced",
+              "lossless"
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Uses a temporary server upload for LibreOffice conversion.",
+      "batch": "map"
+    },
+    {
+      "id": "ocr",
+      "name": "Make a PDF searchable",
+      "description": "Recognize scanned text with OCR when needed.",
+      "category": "PDF & documents",
+      "engine": "media",
+      "action": "ocr",
+      "extensions": [
+        "pdf"
+      ],
+      "sample": "/samples/workspace/document.pdf",
+      "hint": "Scanned-page OCR uses the server. Existing PDF text is preserved.",
+      "version": "1.0.0",
+      "runtime": "media",
+      "remote": true,
+      "local": false,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "output": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "jpeg",
+              "png",
+              "webp",
+              "avif",
+              "pdf",
+              "mp4",
+              "mp3",
+              "csv",
+              "json",
+              "jsonl",
+              "parquet",
+              "arrow",
+              "npy",
+              "safetensors",
+              "obj",
+              "stl",
+              "yaml",
+              "toml",
+              "xml",
+              "utf8",
+              "utf16le",
+              "utf16be",
+              "latin1"
+            ]
+          },
+          "max_bytes": {
+            "type": "integer",
+            "minimum": 512,
+            "maximum": 33554432
+          },
+          "min_bytes": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 33554432
+          },
+          "allow_upscale": {
+            "type": "boolean"
+          },
+          "allow_resize": {
+            "type": "boolean"
+          },
+          "compression_mode": {
+            "type": "string",
+            "enum": [
+              "balanced",
+              "lossless"
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Scanned-page OCR uses the server. Existing PDF text is preserved.",
+      "batch": "map"
+    },
+    {
+      "id": "data-view",
+      "name": "View a dataset",
+      "description": "Preview CSV, JSON, Parquet and Arrow tables.",
+      "category": "Data",
+      "engine": "files",
+      "action": "inspect",
+      "extensions": [
+        "csv",
+        "tsv",
+        "json",
+        "jsonl",
+        "ndjson",
+        "parquet",
+        "arrow",
+        "feather",
+        "ipc"
+      ],
+      "sample": "/samples/workspace/people.csv",
+      "popular": true,
+      "version": "1.0.0",
+      "runtime": "files",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "limits": "Bounded processing; 32 MiB combined input per operation, at most 50 files.",
+      "batch": "map"
+    },
+    {
+      "id": "data-convert",
+      "name": "Convert a dataset",
+      "description": "Export CSV, JSON, JSONL, Parquet or Arrow.",
+      "category": "Data",
+      "engine": "files",
+      "action": "convert",
+      "output": "parquet",
+      "extensions": [
+        "csv",
+        "tsv",
+        "json",
+        "jsonl",
+        "ndjson",
+        "parquet",
+        "arrow",
+        "feather",
+        "ipc"
+      ],
+      "sample": "/samples/workspace/people.csv",
+      "version": "1.0.0",
+      "runtime": "files",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "output": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "jpeg",
+              "png",
+              "webp",
+              "avif",
+              "pdf",
+              "mp4",
+              "mp3",
+              "csv",
+              "json",
+              "jsonl",
+              "parquet",
+              "arrow",
+              "npy",
+              "safetensors",
+              "obj",
+              "stl",
+              "yaml",
+              "toml",
+              "xml",
+              "utf8",
+              "utf16le",
+              "utf16be",
+              "latin1"
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Bounded processing; 32 MiB combined input per operation, at most 50 files.",
+      "batch": "map"
+    },
+    {
+      "id": "data-query",
+      "name": "Filter & query data",
+      "description": "Keep columns, filter rows, sort or run a bounded SQL query.",
+      "category": "Data",
+      "engine": "files",
+      "action": "query",
+      "output": "csv",
+      "extensions": [
+        "csv",
+        "tsv",
+        "json",
+        "jsonl",
+        "ndjson",
+        "parquet",
+        "arrow",
+        "feather",
+        "ipc"
+      ],
+      "sample": "/samples/workspace/people.csv",
+      "version": "1.0.0",
+      "runtime": "files",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "output": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "jpeg",
+              "png",
+              "webp",
+              "avif",
+              "pdf",
+              "mp4",
+              "mp3",
+              "csv",
+              "json",
+              "jsonl",
+              "parquet",
+              "arrow",
+              "npy",
+              "safetensors",
+              "obj",
+              "stl",
+              "yaml",
+              "toml",
+              "xml",
+              "utf8",
+              "utf16le",
+              "utf16be",
+              "latin1"
+            ]
+          },
+          "query": {
+            "type": "string",
+            "maxLength": 8000
+          },
+          "columns": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "maxLength": 8000
+            },
+            "maxItems": 200
+          },
+          "filter_column": {
+            "type": "string",
+            "maxLength": 8000
+          },
+          "filter_value": {
+            "type": "string",
+            "maxLength": 8000
+          },
+          "sort_column": {
+            "type": "string",
+            "maxLength": 8000
+          },
+          "descending": {
+            "type": "boolean"
+          },
+          "deduplicate": {
+            "type": "boolean"
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 50000
+          },
+          "offset": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 50000
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Bounded processing; 32 MiB combined input per operation, at most 50 files.",
+      "batch": "map"
+    },
+    {
+      "id": "data-join",
+      "name": "Join two datasets",
+      "description": "Combine rows using a shared column.",
+      "category": "Data",
+      "engine": "files",
+      "action": "join",
+      "output": "csv",
+      "extensions": [
+        "csv",
+        "tsv",
+        "json",
+        "jsonl",
+        "ndjson",
+        "parquet",
+        "arrow",
+        "feather",
+        "ipc"
+      ],
+      "sample": "/samples/workspace/people.csv",
+      "pair": true,
+      "version": "1.0.0",
+      "runtime": "files",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "join_key": {
+            "type": "string",
+            "maxLength": 8000
+          },
+          "output": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "jpeg",
+              "png",
+              "webp",
+              "avif",
+              "pdf",
+              "mp4",
+              "mp3",
+              "csv",
+              "json",
+              "jsonl",
+              "parquet",
+              "arrow",
+              "npy",
+              "safetensors",
+              "obj",
+              "stl",
+              "yaml",
+              "toml",
+              "xml",
+              "utf8",
+              "utf16le",
+              "utf16be",
+              "latin1"
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Bounded processing; 32 MiB combined input per operation, at most 50 files.",
+      "batch": "pair"
+    },
+    {
+      "id": "model-view",
+      "name": "Inspect a model file",
+      "description": "Read Safetensors, ONNX, GGUF, NumPy and PyTorch containers.",
+      "category": "Models",
+      "engine": "files",
+      "action": "inspect",
+      "extensions": [
+        "safetensors",
+        "onnx",
+        "gguf",
+        "npy",
+        "npz",
+        "pt",
+        "pth",
+        "ckpt"
+      ],
+      "sample": "/samples/workspace/tiny.safetensors",
+      "hint": "Static inspection only. Uploaded model code is never executed or unpickled.",
+      "version": "1.0.0",
+      "runtime": "files",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "limits": "Static inspection only. Uploaded model code is never executed or unpickled.",
+      "batch": "map"
+    },
+    {
+      "id": "tensor-extract",
+      "name": "Extract a tensor",
+      "description": "Save a Safetensors tensor as NumPy or Safetensors.",
+      "category": "Models",
+      "engine": "files",
+      "action": "extract",
+      "output": "npy",
+      "extensions": [
+        "safetensors"
+      ],
+      "sample": "/samples/workspace/tiny.safetensors",
+      "version": "1.0.0",
+      "runtime": "files",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "entry": {
+            "type": "string",
+            "maxLength": 8000
+          },
+          "output": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "jpeg",
+              "png",
+              "webp",
+              "avif",
+              "pdf",
+              "mp4",
+              "mp3",
+              "csv",
+              "json",
+              "jsonl",
+              "parquet",
+              "arrow",
+              "npy",
+              "safetensors",
+              "obj",
+              "stl",
+              "yaml",
+              "toml",
+              "xml",
+              "utf8",
+              "utf16le",
+              "utf16be",
+              "latin1"
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Bounded processing; 32 MiB combined input per operation, at most 50 files.",
+      "batch": "map"
+    },
+    {
+      "id": "tensor-scan",
+      "name": "Check tensor values",
+      "description": "Find NaN, infinity and statistics in F32/F64 tensors.",
+      "category": "Models",
+      "engine": "files",
+      "action": "tensor-stats",
+      "extensions": [
+        "safetensors"
+      ],
+      "sample": "/samples/workspace/tiny.safetensors",
+      "version": "1.0.0",
+      "runtime": "files",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "entry": {
+            "type": "string",
+            "maxLength": 8000
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Bounded processing; 32 MiB combined input per operation, at most 50 files.",
+      "batch": "map"
+    },
+    {
+      "id": "model-compare",
+      "name": "Compare model descriptors",
+      "description": "Compare tensor names, shapes and data types.",
+      "category": "Models",
+      "engine": "files",
+      "action": "compare",
+      "extensions": [
+        "safetensors",
+        "onnx",
+        "gguf"
+      ],
+      "sample": "/samples/workspace/tiny.safetensors",
+      "pair": true,
+      "version": "1.0.0",
+      "runtime": "files",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "limits": "Bounded processing; 32 MiB combined input per operation, at most 50 files.",
+      "batch": "pair"
+    },
+    {
+      "id": "archive-open",
+      "name": "Open an archive",
+      "description": "List entries in ZIP, TAR, GZIP or model containers.",
+      "category": "Archives",
+      "engine": "files",
+      "action": "inspect",
+      "extensions": [
+        "zip",
+        "tar",
+        "gz",
+        "npz",
+        "pt",
+        "pth",
+        "ckpt"
+      ],
+      "sample": "/samples/workspace/example.zip",
+      "popular": true,
+      "version": "1.0.0",
+      "runtime": "files",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "limits": "Bounded processing; 32 MiB combined input per operation, at most 50 files.",
+      "batch": "map"
+    },
+    {
+      "id": "archive-extract",
+      "name": "Extract an archive entry",
+      "description": "Download a named file from a supported archive.",
+      "category": "Archives",
+      "engine": "files",
+      "action": "extract",
+      "extensions": [
+        "zip",
+        "tar",
+        "gz",
+        "npz",
+        "pt",
+        "pth",
+        "ckpt"
+      ],
+      "sample": "/samples/workspace/example.zip",
+      "version": "1.0.0",
+      "runtime": "files",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "entry": {
+            "type": "string",
+            "maxLength": 8000
+          },
+          "output": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "jpeg",
+              "png",
+              "webp",
+              "avif",
+              "pdf",
+              "mp4",
+              "mp3",
+              "csv",
+              "json",
+              "jsonl",
+              "parquet",
+              "arrow",
+              "npy",
+              "safetensors",
+              "obj",
+              "stl",
+              "yaml",
+              "toml",
+              "xml",
+              "utf8",
+              "utf16le",
+              "utf16be",
+              "latin1"
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Bounded processing; 32 MiB combined input per operation, at most 50 files.",
+      "batch": "map"
+    },
+    {
+      "id": "archive-create",
+      "name": "Create a ZIP",
+      "description": "Package your selected files into one archive.",
+      "category": "Archives",
+      "engine": "files",
+      "action": "pack",
+      "sample": "/samples/workspace/people.csv",
+      "version": "1.0.0",
+      "runtime": "files",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "limits": "Bounded processing; 32 MiB combined input per operation, at most 50 files.",
+      "batch": "combine"
+    },
+    {
+      "id": "config-format",
+      "name": "Format JSON, YAML & code",
+      "description": "Make structured text readable and check syntax.",
+      "category": "Text & code",
+      "engine": "files",
+      "action": "format",
+      "extensions": [
+        "json",
+        "yaml",
+        "yml",
+        "toml",
+        "xml",
+        "svg",
+        "txt",
+        "md",
+        "log",
+        "srt",
+        "vtt"
+      ],
+      "sample": "/samples/workspace/settings.json",
+      "version": "1.0.0",
+      "runtime": "files",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "output": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "jpeg",
+              "png",
+              "webp",
+              "avif",
+              "pdf",
+              "mp4",
+              "mp3",
+              "csv",
+              "json",
+              "jsonl",
+              "parquet",
+              "arrow",
+              "npy",
+              "safetensors",
+              "obj",
+              "stl",
+              "yaml",
+              "toml",
+              "xml",
+              "utf8",
+              "utf16le",
+              "utf16be",
+              "latin1"
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Bounded processing; 32 MiB combined input per operation, at most 50 files.",
+      "batch": "map"
+    },
+    {
+      "id": "config-convert",
+      "name": "Convert JSON, YAML & TOML",
+      "description": "Change a configuration file’s format.",
+      "category": "Text & code",
+      "engine": "files",
+      "action": "convert",
+      "output": "yaml",
+      "extensions": [
+        "json",
+        "yaml",
+        "yml",
+        "toml"
+      ],
+      "sample": "/samples/workspace/settings.json",
+      "version": "1.0.0",
+      "runtime": "files",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "output": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "jpeg",
+              "png",
+              "webp",
+              "avif",
+              "pdf",
+              "mp4",
+              "mp3",
+              "csv",
+              "json",
+              "jsonl",
+              "parquet",
+              "arrow",
+              "npy",
+              "safetensors",
+              "obj",
+              "stl",
+              "yaml",
+              "toml",
+              "xml",
+              "utf8",
+              "utf16le",
+              "utf16be",
+              "latin1"
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Bounded processing; 32 MiB combined input per operation, at most 50 files.",
+      "batch": "map"
+    },
+    {
+      "id": "text-compare",
+      "name": "Compare text files",
+      "description": "See line differences between two files.",
+      "category": "Text & code",
+      "engine": "files",
+      "action": "diff",
+      "extensions": [
+        "txt",
+        "md",
+        "log",
+        "json",
+        "yaml",
+        "yml",
+        "toml",
+        "xml",
+        "svg",
+        "srt",
+        "vtt"
+      ],
+      "sample": "/samples/workspace/notes.txt",
+      "pair": true,
+      "version": "1.0.0",
+      "runtime": "files",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "limits": "Bounded processing; 32 MiB combined input per operation, at most 50 files.",
+      "batch": "pair"
+    },
+    {
+      "id": "text-encoding",
+      "name": "Fix text encoding",
+      "description": "Read UTF-16 or Latin-1 and export UTF-8.",
+      "category": "Text & code",
+      "engine": "files",
+      "action": "encoding",
+      "sample": "/samples/workspace/notes.txt",
+      "version": "1.0.0",
+      "runtime": "files",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "output": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "jpeg",
+              "png",
+              "webp",
+              "avif",
+              "pdf",
+              "mp4",
+              "mp3",
+              "csv",
+              "json",
+              "jsonl",
+              "parquet",
+              "arrow",
+              "npy",
+              "safetensors",
+              "obj",
+              "stl",
+              "yaml",
+              "toml",
+              "xml",
+              "utf8",
+              "utf16le",
+              "utf16be",
+              "latin1"
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Bounded processing; 32 MiB combined input per operation, at most 50 files.",
+      "batch": "map"
+    },
+    {
+      "id": "video-compress",
+      "name": "Compress a video",
+      "description": "Prepare supported MP4 and MOV files as MP4.",
+      "category": "Audio & video",
+      "engine": "media",
+      "action": "compress",
+      "output": "mp4",
+      "extensions": [
+        "mp4",
+        "mov"
+      ],
+      "sample": "/samples/workspace/video.mp4",
+      "hint": "Video processing uses a temporary server upload and your cloud allowance.",
+      "version": "1.0.0",
+      "runtime": "media",
+      "remote": true,
+      "local": false,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "output": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "jpeg",
+              "png",
+              "webp",
+              "avif",
+              "pdf",
+              "mp4",
+              "mp3",
+              "csv",
+              "json",
+              "jsonl",
+              "parquet",
+              "arrow",
+              "npy",
+              "safetensors",
+              "obj",
+              "stl",
+              "yaml",
+              "toml",
+              "xml",
+              "utf8",
+              "utf16le",
+              "utf16be",
+              "latin1"
+            ]
+          },
+          "max_bytes": {
+            "type": "integer",
+            "minimum": 512,
+            "maximum": 33554432
+          },
+          "min_bytes": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 33554432
+          },
+          "allow_upscale": {
+            "type": "boolean"
+          },
+          "allow_resize": {
+            "type": "boolean"
+          },
+          "compression_mode": {
+            "type": "string",
+            "enum": [
+              "balanced",
+              "lossless"
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Video processing uses a temporary server upload and your cloud allowance.",
+      "batch": "map"
+    },
+    {
+      "id": "audio-convert",
+      "name": "Convert audio to MP3",
+      "description": "Convert audio or extract the audio from a video.",
+      "category": "Audio & video",
+      "engine": "media",
+      "action": "convert",
+      "output": "mp3",
+      "extensions": [
+        "wav",
+        "mp3",
+        "m4a",
+        "mp4",
+        "mov"
+      ],
+      "sample": "/samples/workspace/audio.wav",
+      "hint": "Audio processing uses a temporary server upload and your cloud allowance.",
+      "version": "1.0.0",
+      "runtime": "media",
+      "remote": true,
+      "local": false,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "output": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "jpeg",
+              "png",
+              "webp",
+              "avif",
+              "pdf",
+              "mp4",
+              "mp3",
+              "csv",
+              "json",
+              "jsonl",
+              "parquet",
+              "arrow",
+              "npy",
+              "safetensors",
+              "obj",
+              "stl",
+              "yaml",
+              "toml",
+              "xml",
+              "utf8",
+              "utf16le",
+              "utf16be",
+              "latin1"
+            ]
+          },
+          "max_bytes": {
+            "type": "integer",
+            "minimum": 512,
+            "maximum": 33554432
+          },
+          "min_bytes": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 33554432
+          },
+          "allow_upscale": {
+            "type": "boolean"
+          },
+          "allow_resize": {
+            "type": "boolean"
+          },
+          "compression_mode": {
+            "type": "string",
+            "enum": [
+              "balanced",
+              "lossless"
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Audio processing uses a temporary server upload and your cloud allowance.",
+      "batch": "map"
+    },
+    {
+      "id": "mesh-view",
+      "name": "Inspect a 3D file",
+      "description": "Preview OBJ/STL geometry or inspect glTF scene metadata.",
+      "category": "3D & maps",
+      "engine": "files",
+      "action": "inspect",
+      "extensions": [
+        "obj",
+        "stl",
+        "gltf"
+      ],
+      "sample": "/samples/workspace/triangle.obj",
+      "version": "1.0.0",
+      "runtime": "files",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "limits": "Bounded processing; 32 MiB combined input per operation, at most 50 files.",
+      "batch": "map"
+    },
+    {
+      "id": "mesh-convert",
+      "name": "Convert OBJ & STL",
+      "description": "Convert supported triangle meshes.",
+      "category": "3D & maps",
+      "engine": "files",
+      "action": "convert",
+      "output": "stl",
+      "extensions": [
+        "obj",
+        "stl"
+      ],
+      "sample": "/samples/workspace/triangle.obj",
+      "version": "1.0.0",
+      "runtime": "files",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "output": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "jpeg",
+              "png",
+              "webp",
+              "avif",
+              "pdf",
+              "mp4",
+              "mp3",
+              "csv",
+              "json",
+              "jsonl",
+              "parquet",
+              "arrow",
+              "npy",
+              "safetensors",
+              "obj",
+              "stl",
+              "yaml",
+              "toml",
+              "xml",
+              "utf8",
+              "utf16le",
+              "utf16be",
+              "latin1"
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Bounded processing; 32 MiB combined input per operation, at most 50 files.",
+      "batch": "map"
+    },
+    {
+      "id": "geo-convert",
+      "name": "GeoJSON to CSV",
+      "description": "Export feature properties and geometry as a table.",
+      "category": "3D & maps",
+      "engine": "files",
+      "action": "convert",
+      "output": "csv",
+      "extensions": [
+        "geojson"
+      ],
+      "sample": "/samples/workspace/places.geojson",
+      "version": "1.0.0",
+      "runtime": "files",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "output": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "jpeg",
+              "png",
+              "webp",
+              "avif",
+              "pdf",
+              "mp4",
+              "mp3",
+              "csv",
+              "json",
+              "jsonl",
+              "parquet",
+              "arrow",
+              "npy",
+              "safetensors",
+              "obj",
+              "stl",
+              "yaml",
+              "toml",
+              "xml",
+              "utf8",
+              "utf16le",
+              "utf16be",
+              "latin1"
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "limits": "Bounded processing; 32 MiB combined input per operation, at most 50 files.",
+      "batch": "map"
+    },
+    {
+      "id": "inspect",
+      "name": "Inspect a file",
+      "description": "Read supported metadata, structure or binary details.",
+      "category": "Essentials",
+      "engine": "files",
+      "action": "inspect",
+      "sample": "/samples/workspace/people.csv",
+      "version": "1.0.0",
+      "runtime": "files",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "limits": "Bounded processing; 32 MiB combined input per operation, at most 50 files.",
+      "batch": "map"
+    },
+    {
+      "id": "hash",
+      "name": "Calculate a file checksum",
+      "description": "Read any file in chunks and calculate SHA-256.",
+      "category": "Essentials",
+      "engine": "files",
+      "action": "hash",
+      "sample": "/samples/workspace/people.csv",
+      "version": "1.0.0",
+      "runtime": "files",
+      "remote": true,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "limits": "Bounded processing; 32 MiB combined input per operation, at most 50 files.",
+      "batch": "map"
+    },
+    {
+      "id": "size-calculator",
+      "name": "Calculate a size limit",
+      "description": "Compare KB, KiB, MB and exact bytes.",
+      "category": "Essentials",
+      "engine": "calculator",
+      "action": "calculate",
+      "sample": "/samples/workspace/people.csv",
+      "version": "1.0.0",
+      "runtime": "calculator",
+      "remote": false,
+      "local": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "limits": "Bounded processing; 32 MiB combined input per operation, at most 50 files.",
+      "batch": "map"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "sizemyfile",
+  "version": "1.0.0",
+  "description": "Convert, compress and inspect files with ordered workflows.",
+  "author": {
+    "name": "SizeMyFile",
+    "email": "info@seehash.com"
+  },
+  "homepage": "https://sizemyfile.com/agents",
+  "license": "MIT"
+}

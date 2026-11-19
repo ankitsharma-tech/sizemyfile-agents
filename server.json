@@ -1,0 +1,27 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "com.sizemyfile/tools",
+  "title": "SizeMyFile",
+  "description": "File conversion, compression and inspection workflows with Rust edge execution and scoped OAuth.",
+  "version": "1.0.0",
+  "websiteUrl": "https://sizemyfile.com/agents",
+  "repository": {
+    "url": "https://github.com/ankitsharma-tech/sizemyfile-agents",
+    "source": "github"
+  },
+  "icons": [
+    {
+      "src": "https://sizemyfile.com/icon.svg",
+      "mimeType": "image/svg+xml",
+      "sizes": [
+        "any"
+      ]
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://sizemyfile.com/mcp"
+    }
+  ]
+}

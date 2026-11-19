@@ -1,0 +1,14 @@
+{
+  "name": "sizemyfile",
+  "owner": {
+    "name": "SizeMyFile",
+    "email": "info@seehash.com"
+  },
+  "plugins": [
+    {
+      "name": "sizemyfile",
+      "source": "./plugin",
+      "description": "File conversion, compression and inspection workflows."
+    }
+  ]
+}

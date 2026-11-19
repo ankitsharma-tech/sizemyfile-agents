@@ -1,0 +1,50 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "sizemyfile",
+  "version": "1.0.0",
+  "description": "Convert, compress and inspect files with ordered workflows. Rust edge processing with bounded server fallback.",
+  "author": {
+    "name": "SizeMyFile",
+    "email": "info@seehash.com",
+    "url": "https://sizemyfile.com"
+  },
+  "homepage": "https://sizemyfile.com/agents",
+  "repository": "https://github.com/ankitsharma-tech/sizemyfile-agents",
+  "license": "MIT",
+  "keywords": [
+    "files",
+    "conversion",
+    "compression",
+    "pdf",
+    "data",
+    "rust",
+    "wasm"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "SizeMyFile",
+        "shortDescription": "File tools for ordered, validated workflows",
+        "longDescription": "Discover 100 file tools. Use 62 remote operations for images, PDFs, data, models, archives and text. Connect a SizeMyFile account, explicitly share files, then process and download validated results. A separate local runner supports 96 tools on your own computer. File and account limits apply.",
+        "developerName": "SizeMyFile",
+        "category": "Productivity",
+        "capabilities": [
+          "Read",
+          "Write"
+        ],
+        "websiteURL": "https://sizemyfile.com/agents",
+        "privacyPolicyURL": "https://sizemyfile.com/privacy",
+        "termsOfServiceURL": "https://sizemyfile.com/terms",
+        "supportURL": "https://sizemyfile.com/contact",
+        "brandColor": "#234F3B",
+        "composerIcon": "./assets/icon.png",
+        "logo": "./assets/icon.png",
+        "defaultPrompt": [
+          "Convert my CSV to Parquet, then inspect the result.",
+          "Merge my PDFs, then extract the first page.",
+          "Convert this WebP to PNG and compress the converted file."
+        ]
+      }
+    }
+  }
+}
