@@ -23,6 +23,14 @@ These pages describe supported formats and limits. Choose on-device only to prev
 
 [SizeMyFile on Glama](https://glama.ai/mcp/servers/ankitsharma-tech/sizemyfile-agents) lists this integration for MCP discovery.
 
+## Reproducible examples
+
+[Download synthetic inputs, results and exact settings](https://sizemyfile.com/workflow-examples) for JSON to TOML, Parquet to CSV, minimum-byte PNG expansion, and WebP to PNG followed by compression. The [measurement report](https://sizemyfile.com/workflow-examples/results.json) includes SHA-256 hashes and validation details.
+
+The examples show real limitations: JSON null cannot be represented in TOML, CSV loses schema types, padding does not add image detail, and converting WebP to PNG can increase byte size. The second compression step consumes the converted output.
+
+Only these synthetic fixtures and measurements are [CC0](https://sizemyfile.com/workflow-examples/LICENSE.txt). They are small reproducible cases, not representative speed or compression benchmarks. Application components retain their own licenses.
+
 ## Quick connections
 
 Claude Code: `claude mcp add --transport http sizemyfile https://sizemyfile.com/mcp`
